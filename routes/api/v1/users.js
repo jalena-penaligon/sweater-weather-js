@@ -38,7 +38,9 @@ router.post("/", function(req, res, next) {
 
 router.post ("/sessions", function(req, res, next) {
   User.findOne({ where: {email: req.body.email} }).then(user => {
-  // project will be the first entry of the Projects table with the title 'aProject' || null
+  if (user.password = req.body.password) {
+    
+  }
 })
 
 })
