@@ -36,4 +36,11 @@ router.post("/", function(req, res, next) {
   });
 });
 
+router.post ("/sessions", function(req, res, next) {
+  User.findOne({ where: {email: req.body.email} }).then(user => {
+  // project will be the first entry of the Projects table with the title 'aProject' || null
+})
+
+})
+
 module.exports = router; //this should stay at the bottom of the file
