@@ -5,6 +5,17 @@ var bcrypt = require('bcrypt');
 const saltRounds = 10;
 const uuidv4 = require('uuid/v4');
 
+var findUserByEmail = function(email){
+  return User.findOne({where: {email: email} })
+  .then(user => {
+    if(user == null){
+      return true;
+    } else {
+      return false;
+    }
+  })
+};
+
 router.get("/", function(req, res, next) {
   User.findAll()
     .then(users => {
@@ -20,18 +31,26 @@ router.get("/", function(req, res, next) {
 router.post("/", function(req, res, next) {
   bcrypt.hash(req.body.password, saltRounds, function (err,   hash) {
   var key = uuidv4();
-  User.create({
+  findUserByEmail(req.body.email)
+    .then((validUser) => {
+      if (validUser == false) {
+        res.setHeader("Content-Type", "application/json");
+        res.status(400).send("Email is already in use.")
+      } else {
+        User.create({
           email: req.body.email,
           api_key: key,
           password: hash
-    })
-    .then(user => {
-      res.setHeader("Content-Type", "application/json");
-      res.status(201).send({ api_key: user.api_key });
-    })
-    .catch(error => {
-      res.setHeader("Content-Type", "application/json");
-      res.status(500).send({ error });
+        })
+        .then(user => {
+          res.setHeader("Content-Type", "application/json");
+          res.status(201).send({ api_key: user.api_key });
+        })
+        .catch(error => {
+          res.setHeader("Content-Type", "application/json");
+          res.status(500).send({ error });
+        });
+      }
     });
   });
 });
