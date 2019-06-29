@@ -8,7 +8,7 @@ router.post("/", function(req, res, next) {
   User.findOne({where: {email: req.body.email} })
     .then(user => {
       if (user == null) {
-        res.status(500).send("This user does not exist.");
+        res.status(401).send("This user does not exist.");
       } else {
         bcrypt.compare(req.body.password, user.password, function(err, result) {
           if (result == true) {
@@ -16,7 +16,7 @@ router.post("/", function(req, res, next) {
             res.status(201).send({ api_key: user.api_key });
           } else {
             res.setHeader("Content-Type", "application/json");
-            res.status(500).send("Incorrect password");
+            res.status(401).send("Incorrect password");
           }
         });
       }
