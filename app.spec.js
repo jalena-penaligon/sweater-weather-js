@@ -9,3 +9,11 @@ describe('Test the root path', () => {
     })
   });
 });
+
+describe('Test the forecast path', () => {
+  test('It should respond to the GET method', () => {
+    return request(app).get("/forecast?location=denver,co").then(response => {
+      expect(response.statusCode).toBe(200)
+    })
+  });
+});
