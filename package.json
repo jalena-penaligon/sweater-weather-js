@@ -19,6 +19,7 @@
     "save": "^2.4.0",
     "sequelize": "^5.8.12",
     "sequelize-cli": "^5.5.0",
+    "titleize": "^2.1.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
