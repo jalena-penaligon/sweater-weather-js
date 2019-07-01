@@ -19,6 +19,10 @@ The project was built using Express which implements the following:
 * Sequelize - PostgreSQL.
 * JavaScript
 
+## Production Site
+
+View it in production at https://sheltered-scrubland-79049.herokuapp.com/
+
 ## Instructions
   ### How to setup:
       git clone git@github.com:jalena-penaligon/sweater-weather-js.git
