@@ -28,5 +28,36 @@ router.post("/", function(req, res, next) {
     });
 });
 
+router.delete("/", function(req, res, next) {
+  User.findOne({where: {api_key: req.body.api_key} })
+    .then(user => {
+      if (user != null) {
+        Location.findOne({where: {cityState: req.body.location.toLowerCase()} })
+          .then(location => {
+            Favorite.findOne({where: {userId: user.id, locationId: location.id} })
+              .then(favorite => {
+                favorite.destroy()
+                res.status(204);
+              })
+              .catch(error => {
+                res.setHeader("Content-Type", "application/json");
+                res.status(500).send({error})
+              });
+          })
+          .catch(error => {
+            res.setHeader("Content-Type", "application/json");
+            res.status(500).send({error})
+          });
+      } else {
+        res.setHeader("Content-Type", "application/json");
+        res.status(401).send("Unauthorized");
+      }
+    })
+    .catch(error => {
+      res.setHeader("Content-Type", "application/json");
+      res.status(500).send({error})
+    });
+});
+
 
 module.exports = router; //this should stay at the bottom of the file
