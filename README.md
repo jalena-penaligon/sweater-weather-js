@@ -102,9 +102,9 @@ View it in production at https://sheltered-scrubland-79049.herokuapp.com/
 
   ### Running Tests:
   - Tests for this API were built in Jest. Follow the steps below to setup with Jest.
-        npm install jest -g
-        npm install babel-jest supertest shelljs -D
-        npm test
+          npm install jest -g
+          npm install babel-jest supertest shelljs -D
+          npm test
 
   ## Core Contributors:
   Jalena Taylor: https://github.com/jalena-penaligon/
