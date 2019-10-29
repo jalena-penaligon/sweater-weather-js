@@ -17,7 +17,7 @@
     "pg": "^7.11.0",
     "pryjs": "^1.0.3",
     "save": "^2.4.0",
-    "sequelize": "^5.8.12",
+    "sequelize": "^5.15.1",
     "sequelize-cli": "^5.5.0",
     "titleize": "^2.1.0",
     "uuid": "^3.3.2"
